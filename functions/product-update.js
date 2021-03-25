@@ -30,7 +30,7 @@ exports.handler = function (event, context, callback) {
       .then(result => {
         if (result.data.product !== bodyString) {
           // call rebuild
-          axios.pot(process.env.NETLIFY_BUILD_URL);
+          axios.post(process.env.NETLIFY_BUILD_URL);
           client
             .query(
               q.Update(result.ref, {
@@ -39,7 +39,7 @@ exports.handler = function (event, context, callback) {
             )
             .then(() => {
               // call rebuild
-              axios.pot(process.env.NETLIFY_BUILD_URL);
+              axios.post(process.env.NETLIFY_BUILD_URL);
             })
             .catch(e => {
               console.log('error updating product: ', e);
@@ -55,7 +55,7 @@ exports.handler = function (event, context, callback) {
           )
           .then(() => {
             // call rebuild
-            axios.pot(process.env.NETLIFY_BUILD_URL);
+            axios.post(process.env.NETLIFY_BUILD_URL);
           })
           .catch(e => {
             console.log('error adding to db: ', e);
